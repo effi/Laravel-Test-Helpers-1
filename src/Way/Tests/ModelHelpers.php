@@ -9,16 +9,16 @@ trait ModelHelpers {
         Mockery::close();
     }
 
-    public function assertValid($model)
+    public function assertValid($model, $message = 'Model did not pass validation.')
     {
         $this->assertRespondsTo('validate', $model, "The 'validate' method does not exist on this model.");
-        $this->assertTrue($model->validate(), 'Model did not pass validation.');
+        $this->assertTrue($model->validate(), $message);
     }
 
-    public function assertNotValid($model)
+    public function assertNotValid($model, $message = 'Did not expect model to pass validation.')
     {
         $this->assertRespondsTo('validate', $model, "The 'validate' method does not exist on this model.");
-        $this->assertFalse($model->validate(), 'Did not expect model to pass validation.');
+        $this->assertFalse($model->validate(), $message);
     }
 
     public function assertBelongsToMany($parent, $child)
